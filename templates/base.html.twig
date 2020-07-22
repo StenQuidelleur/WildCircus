@@ -6,35 +6,49 @@
         <link rel="shortcut icon" type="image/x-icon" href="assets/9136circus.ico">
         <title>{% block title %}WildCircus{% endblock %}</title>
         <script src="https://kit.fontawesome.com/12c728ad22.js" crossorigin="anonymous"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
         <link rel="stylesheet" href="assets/css/style.css">
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Wild Circus</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Performances</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Prices</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">About us</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand logo" href="{{ path('home_index') }}">WildCircus</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto ">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('performances') }}">Performances</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Prices</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('aboutus') }}">About us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('contact') }}">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="float-right">
+                <a class="btn btn-warning" href="{{ path('app_login') }}">Sign in</a>
+            </div>
+        </nav>
+        {% for category, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert mt-3 alert-{{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
         {% block body %}{% endblock %}
+        <nav class="navbar navbar-dark bg-dark flex-column footer">
+            <a class="btn nav-item nav-link button" href="">Contact</a>
+            <span class="navbar-text copyright">WildCircus, Copyright © 2020</span>
+        </nav>
         {% block javascripts %}{% endblock %}
         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

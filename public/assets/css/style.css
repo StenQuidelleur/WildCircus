@@ -1,0 +1,21 @@
+.logo {
+    font-family: 'Noto Serif', serif;
+}
+
+.banner {
+    background:linear-gradient(180deg, rgba(0, 0, 0, 0.9), rgba(54, 54, 54, 0.2) 45%, rgba(28, 28, 28, 0.6)), url("https://i.postimg.cc/cJbZ5k3Q/sergio-souza-x7-Ycc-Vl-YQQ-unsplash.jpg") center center / cover no-repeat;
+    height: 500px;
+    color: #FFF;
+    box-shadow: 0 15px 15px rgba(0, 0, 0, .15);
+}
+
+.text-banner {
+    margin-top: 250px;
+}
+
+@media only screen and (min-width: 600px) {
+    .footer {
+        flex-direction: inherit !important;
+        justify-content: space-around;
+    }
+}
