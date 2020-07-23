@@ -5,10 +5,15 @@
         <div class="card my-5 bg-light">
             <div class="card-body">
                 <h1 class="text-center mb-4">Take your Tickets</h1>
-                <div class="my-3 px-5 ">
+                <div class="my-3 px-5">
                     {{ form_start(form) }}
                     {{ form_widget(form) }}
-
+                    <label for="date">Choose your date :</label>
+                    <select class="form-control mb-3" name="perfDate">
+                        {% for date in perfDates %}
+                            <option value="{{date.id}}">{{date.date}}-{{ date.performance }}</option>
+                        {% endfor %}
+                    </select>
                     <button class="btn btn-success">{{ button_label|default('Validate') }}</button>
                     {{ form_end(form) }}
                 </div>
@@ -17,10 +22,11 @@
                         <div class="card bg-ticket col-11 mb-5">
                             <div class="col-12">
                                 <div class="card-body mt-2">
-                                    <h1 class="card-title font-weight-bold mb-5 text-center">{{ ticket.performance }}</h1>
-                                    <p class="card-text">- This ticket is for : {{ ticket.ageRange }}</p>
-                                    <p class="card-text">- The value of this ticket is {{ ticket.quantity }}.</p>
-                                    <p class="text-right mr-3"><strong>Total:</strong> {{ (ticket.ageRange.price * ticket.performance.price / 100) * ticket.quantity }}€</p>
+                                    <h1 class="card-title font-weight-bold mb-5 text-center">{{ ticket.performance }} - WildCircus</h1>
+                                    <p class="card-text">- This ticket is for : <strong>{{ ticket.ageRange }}</strong></p>
+                                    <p class="card-text">- The value of this ticket is <strong>{{ ticket.quantity }}</strong>.</p>
+                                    <p class="card-text">- The date of this show is <strong>{{ perfDates[ticket.date].date }}</strong>.</p>
+                                    <p class="text-right mr-3"><strong>Price:</strong> {{ (ticket.ageRange.price * ticket.performance.price / 100) * ticket.quantity }}€</p>
                                     <div class="row justify-content-center">
                                         <a href="{{ path('ticket_edit', {'id': ticket.id}) }}" class="btn button-form"><i class="fas fa-2x fa-edit"></i></a>
                                         {{ include('ticket/_delete_form.html.twig') }}
@@ -32,7 +38,7 @@
                 {% endfor %}
                 {% if tickets != null %}
                 <div class="col text-center">
-                    <a class="btn btn-success" href="{{ path('order_validation') }}">Valid your order </a>
+                    <a class="btn btn-success" href="{{ path('order_payment') }}">Valid your order </a>
                 </div>
                 {% else %}
                 {% endif %}

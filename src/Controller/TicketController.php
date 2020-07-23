@@ -43,14 +43,16 @@ class TicketController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $ticket->setUser($this->getUser());
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($ticket);
-            $entityManager->flush();
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $ticket->setUser($this->getUser());
+                $ticket->setDate($_POST['perfDate']);
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($ticket);
+                $entityManager->flush();
 
-            return $this->redirectToRoute('ticket_order');
+                return $this->redirectToRoute('ticket_order');
+            }
         }
-
         $perfDates = $perfDate->findAll();
         return $this->render('booking/booking.html.twig', [
             'ticket' => $ticket,
@@ -73,6 +75,8 @@ class TicketController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+            $ticket->setUser($this->getUser());
+            $ticket->setDate($_POST['perfDate']);
 
             return $this->redirectToRoute('ticket_order');
         }
@@ -101,6 +105,15 @@ class TicketController extends AbstractController
     }
 
     /**
+     * @Route("/order-payment", name="order_payment")
+     * @return Response
+     */
+    public function orderPayment(): Response
+    {
+        return $this->render('booking/orderPayment.html.twig');
+    }
+
+    /**
      * @Route("/order-validation", name="order_validation")
      * @return Response
      */
@@ -111,16 +124,19 @@ class TicketController extends AbstractController
 
     /**
      * @Route("/ajax-generate-pdfOrder", name="ajax-generate-pdfOrder",  methods={"GET", "POST"}))
+     * @param PerformanceDateRepository $perfDate
      * @return JsonResponse
      */
-    public function generatePdfOrder()
+    public function generatePdfOrder(PerformanceDateRepository $perfDate)
     {
         $pdfOptions = new Options();
         $pdfOptions->set('defaultFont', 'Arial');
         $dompdf = new Dompdf($pdfOptions);
         $tickets = $this->getUser()->getTickets();
+        $perfDates = $perfDate->findAll();
         $html = $this->renderView('pdf/order.html.twig', [
-            'tickets' => $tickets
+            'tickets' => $tickets,
+            'perfDates' => $perfDates
         ]);
         $dompdf->loadHtml($html);
         $dompdf->setPaper('A4', 'portrait');
