@@ -81,4 +81,9 @@ class Date
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->getDate()->format('Y-m-d');
+    }
 }
