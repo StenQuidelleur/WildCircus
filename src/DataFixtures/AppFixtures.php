@@ -26,9 +26,9 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $faker = Factory::create();
-        $ageRange = ['Adluts' => 0,
+        $ageRange = ['Adluts' => 100,
                     'Children (under 12 years)' => 50,
-                    'Group (more than 10 persons)' => 20,
+                    'Group (more than 10 persons)' => 80,
                     'School' => 50
         ];
         foreach ($ageRange as $item => $percent) {
