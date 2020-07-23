@@ -2,6 +2,13 @@
 
 {% block body %}
     <div class="container-fluid banner">
+        {% for category, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
         <div class="row justify-content-center align-items-center">
             <p class="text-banner">{{ banner.message }}</p>
         </div>
