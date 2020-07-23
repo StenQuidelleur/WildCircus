@@ -1,0 +1,109 @@
+easy_admin:
+  disabled_actions: ['show']
+  site_name: '<h1 style="font-family: Noto Serif, serif; color: #FFF;" >WildCircus</h1>'
+  formats:
+    datetime: 'd/m/Y'
+  design:
+    assets:
+      css:
+        - 'assets/css/admin.css'
+      favicon: '/assets/9136circus.ico'
+    menu:
+      - {entity: 'CategoryPerf', icon: 'search'}
+      - {entity: 'Artist', icon: 'user'}
+      - {entity: 'Perforance', icon: 'theater-masks'}
+      - {entity: 'Date', icon: 'calendar-alt'}
+      - {entity: 'PerformanceDate', icon: 'magic'}
+      - {entity: 'Banner', icon: 'comment-alt'}
+      - {entity: 'User', icon: 'users'}
+
+  entities:
+      CategoryPerf:
+          class: App\Entity\CategoryPerf
+          list:
+            fields:
+              - id
+              - name
+              - image
+            actions:
+              - {name: 'delete', icon: 'trash', label: false, css_class: 'btn btn-danger'}
+              - {name: 'edit', icon: 'pencil', label: false, css_class: 'btn btn-warning'}
+          form:
+            fields:
+              - name
+              - image
+
+      Artist:
+        class: App\Entity\Artist
+        list:
+          fields:
+            - id
+            - firstname
+            - lastname
+            - picture
+            - category
+          actions:
+            - {name: 'delete', icon: 'trash', label: false, css_class: 'btn btn-danger'}
+            - {name: 'edit', icon: 'pencil', label: false, css_class: 'btn btn-warning'}
+        form:
+          fields:
+            - firstname
+            - lastname
+            - picture
+            - category
+
+      Perforance:
+        class: App\Entity\Performance
+        list:
+          fields:
+            - id
+            - name
+            - image
+            - price
+            - category
+          actions:
+            - {name: 'delete', icon: 'trash', label: false, css_class: 'btn btn-danger'}
+            - {name: 'edit', icon: 'pencil', label: false, css_class: 'btn btn-warning'}
+          form:
+            fields:
+              - name
+              - image
+              - price
+              - category
+
+      Date:
+        class: App\Entity\Date
+        list:
+          fields:
+            - id
+            - date
+          actions:
+            - {name: 'delete', icon: 'trash', label: false, css_class: 'btn btn-danger'}
+            - {name: 'edit', icon: 'pencil', label: false, css_class: 'btn btn-warning'}
+          form:
+            fields:
+              - date
+
+      PerformanceDate:
+        class: App\Entity\PerformanceDate
+        list:
+          actions:
+            - {name: 'delete', icon: 'trash', label: false, css_class: 'btn btn-danger'}
+            - {name: 'edit', icon: 'pencil', label: false, css_class: 'btn btn-warning'}
+
+      Banner:
+        class: App\Entity\Banner
+        list:
+          actions:
+            - {name: 'delete', icon: 'trash', label: false, css_class: 'btn btn-danger'}
+            - {name: 'edit', icon: 'pencil', label: false, css_class: 'btn btn-warning'}
+
+      User:
+        class: App\Entity\User
+        list:
+          fields:
+            - id
+            - email
+          actions:
+            - {name: 'delete', icon: 'trash', label: false, css_class: 'btn btn-danger'}
+            - {name: 'edit', icon: 'pencil', label: false, css_class: 'btn btn-warning'}
