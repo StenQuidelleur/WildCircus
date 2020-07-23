@@ -13,7 +13,7 @@
                 <spacer size="35"></spacer>
                 <h1>
                     <center>
-                        {{ contact.firstname }} {{ contact.lastname }}
+                        Nice to meet you {{ user.email }} !
                     </center>
                 </h1>
                 <spacer size="10"></spacer>
@@ -22,18 +22,8 @@
         <spacer size="30"></spacer>
         <row>
             <columns>
-                <p>
-                    <strong>Email</strong> : {{ contact.email }}
-                </p>
-                <p>
-                    <strong>Objet</strong> : {{ contact.object }}
-                </p>
-                <p>
-                    You received an email from <strong>{{ contact.firstname }} {{ contact.lastname }}</strong> :
-                </p>
-                <p>
-                    {{ contact.message }}
-                </p>
+                <p>Thank you for your reservation, you will find your tickets attached!</p>
+                <p>Thank you again and have a good show !!</p>
             </columns>
         </row>
         <row class="bottom">
