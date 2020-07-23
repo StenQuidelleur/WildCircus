@@ -2,30 +2,41 @@
 
 {% block body %}
     <div class="container">
-        <h1 class="text-center">Take your Tickets</h1>
-        <div class="row my-3 col-12">
-            {{ form_start(form) }}
-            {{ form_widget(form) }}
+        <div class="card my-5 bg-light">
+            <div class="card-body">
+                <h1 class="text-center mb-4">Take your Tickets</h1>
+                <div class="my-3 px-5 ">
+                    {{ form_start(form) }}
+                    {{ form_widget(form) }}
 
-            <button class="btn btn-success">{{ button_label|default('Validate') }}</button>
-            {{ form_end(form) }}
-        </div>
-        {% for ticket in tickets %}
-            <div class="card bg-light mb-5">
-                <div class="row no-gutters">
-                    <div class="col-12">
-                        <div class="card-body">
-                            <h5 class="card-title mb-5 text-center">{{ ticket.performance }}</h5>
-                            <p class="card-text">{{ ticket.ageRange }}</p>
-                            <p class="card-text">{{ ticket.quantity }}</p>
-                            <p><strong>Total:</strong> {{ (ticket.ageRange.price * ticket.performance.price / 100) * ticket.quantity }}€</p>
-                            <a href="{{ path('ticket_edit', {'id': ticket.id}) }}" class="btn btn-warning mt-2 button-form"><i class="fas fa-edit"></i></a>
-                            {{ include('ticket/_delete_form.html.twig') }}
+                    <button class="btn btn-success">{{ button_label|default('Validate') }}</button>
+                    {{ form_end(form) }}
+                </div>
+                {% for ticket in tickets %}
+                    <div class="row mt-5 no-gutters justify-content-center">
+                        <div class="card bg-ticket col-11 mb-5">
+                            <div class="col-12">
+                                <div class="card-body mt-2">
+                                    <h1 class="card-title font-weight-bold mb-5 text-center">{{ ticket.performance }}</h1>
+                                    <p class="card-text">- This ticket is for : {{ ticket.ageRange }}</p>
+                                    <p class="card-text">- The value of this ticket is {{ ticket.quantity }}.</p>
+                                    <p class="text-right mr-3"><strong>Total:</strong> {{ (ticket.ageRange.price * ticket.performance.price / 100) * ticket.quantity }}€</p>
+                                    <div class="row justify-content-center">
+                                        <a href="{{ path('ticket_edit', {'id': ticket.id}) }}" class="btn button-form"><i class="fas fa-2x fa-edit"></i></a>
+                                        {{ include('ticket/_delete_form.html.twig') }}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                {% endfor %}
+                {% if tickets != null %}
+                <div class="col text-center">
+                    <a class="btn btn-success" href="{{ path('order_validation') }}">Valid your order </a>
                 </div>
+                {% else %}
+                {% endif %}
             </div>
-        {% endfor %}
-        <a class="btn btn-success" href="{{ path('order_validation') }}">Valid your order </a>
+        </div>
     </div>
 {% endblock %}

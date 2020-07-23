@@ -24,14 +24,17 @@ easy_admin:
             fields:
               - id
               - name
-              - image
+              - { property: 'image', type: 'image', base_path: '%uploads_path%' }
             actions:
               - {name: 'delete', icon: 'trash', label: false, css_class: 'btn btn-danger'}
               - {name: 'edit', icon: 'pencil', label: false, css_class: 'btn btn-warning'}
+          show:
+            fields:
+              - { property: 'image', type: 'image', base_path: '%uploads_path%' }
           form:
             fields:
               - name
-              - image
+              - { property: 'imageFile', type: 'vich_image' }
 
       Artist:
         class: App\Entity\Artist
@@ -40,16 +43,21 @@ easy_admin:
             - id
             - firstname
             - lastname
-            - picture
+            - { property: 'picture', type: 'image', base_path: '%uploads_path%' }
+            - resume
             - category
           actions:
             - {name: 'delete', icon: 'trash', label: false, css_class: 'btn btn-danger'}
             - {name: 'edit', icon: 'pencil', label: false, css_class: 'btn btn-warning'}
+        show:
+          fields:
+            - { property: 'picture', type: 'image', base_path: '%uploads_path%' }
         form:
           fields:
             - firstname
             - lastname
-            - picture
+            - { property: 'imageFile', type: 'vich_image' }
+            - resume
             - category
 
       Perforance:
@@ -58,18 +66,25 @@ easy_admin:
           fields:
             - id
             - name
-            - image
+            - { property: 'image', type: 'image', base_path: '%uploads_path%' }
             - price
             - category
+            - artist
+            - resume
           actions:
             - {name: 'delete', icon: 'trash', label: false, css_class: 'btn btn-danger'}
             - {name: 'edit', icon: 'pencil', label: false, css_class: 'btn btn-warning'}
-          form:
-            fields:
-              - name
-              - image
-              - price
-              - category
+        show:
+          fields:
+            - { property: 'image', type: 'image', base_path: '%uploads_path%' }
+        form:
+          fields:
+            - name
+            - { property: 'imageFile', type: 'vich_image' }
+            - price
+            - category
+            - artist
+            - resume
 
       Date:
         class: App\Entity\Date
@@ -80,9 +95,9 @@ easy_admin:
           actions:
             - {name: 'delete', icon: 'trash', label: false, css_class: 'btn btn-danger'}
             - {name: 'edit', icon: 'pencil', label: false, css_class: 'btn btn-warning'}
-          form:
-            fields:
-              - date
+        form:
+          fields:
+            - date
 
       PerformanceDate:
         class: App\Entity\PerformanceDate
@@ -94,9 +109,21 @@ easy_admin:
       Banner:
         class: App\Entity\Banner
         list:
+          fields:
+            - id
+            - { property: 'image', type: 'image', base_path: '%uploads_path%' }
+            - message
           actions:
             - {name: 'delete', icon: 'trash', label: false, css_class: 'btn btn-danger'}
             - {name: 'edit', icon: 'pencil', label: false, css_class: 'btn btn-warning'}
+        show:
+          fields:
+            - { property: 'image', type: 'image', base_path: '%uploads_path%' }
+        form:
+          fields:
+            - { property: 'imageFile', type: 'vich_image' }
+            - message
+
 
       User:
         class: App\Entity\User

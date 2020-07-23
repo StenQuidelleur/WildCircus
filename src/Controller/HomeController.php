@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Entity\Contact;
 use App\Form\ContactType;
+use App\Repository\AgeRangeRepository;
 use App\Repository\BannerRepository;
 use App\Repository\CategoryPerfRepository;
 use App\Repository\PerformanceRepository;
@@ -45,6 +46,22 @@ class HomeController extends AbstractController
         $performances = $performance->findAll();
         return $this->render('home/performances.html.twig', [
             'performances' => $performances
+        ]);
+    }
+
+    /**
+     * @Route("/prices", name="prices")
+     * @param PerformanceRepository $performance
+     * @param AgeRangeRepository $range
+     * @return Response
+     */
+    public function price(PerformanceRepository $performance, AgeRangeRepository $range): Response
+    {
+        $performances = $performance->findAll();
+        $ranges = $range->findAll();
+        return $this->render('home/prices.html.twig', [
+            'performances' => $performances,
+            'ranges' => $ranges
         ]);
     }
 

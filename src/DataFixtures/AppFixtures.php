@@ -37,7 +37,7 @@ class AppFixtures extends Fixture
             $ageR->setPrice($percent);
             $manager->persist($ageR);
         }
-
+        /*
         $categPerfArray = [];
         $categPerf = ['Clown','Magician','Acrobat'];
         foreach ($categPerf as $item) {
@@ -91,7 +91,7 @@ class AppFixtures extends Fixture
         $banner = new Banner();
         $banner->setImage($bannerArray[1]);
         $banner->setMessage($bannerArray[0]);
-        $manager->persist($banner);
+        $manager->persist($banner);*/
 
         $user = new User();
         $user->setEmail('sten@gmail.com');

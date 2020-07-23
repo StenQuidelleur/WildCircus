@@ -6,9 +6,12 @@ use App\Repository\ArtistRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=ArtistRepository::class)
+ * @Vich\Uploadable
  */
 class Artist
 {
@@ -33,6 +36,18 @@ class Artist
      * @ORM\Column(type="string", length=255)
      */
     private $picture;
+
+    /**
+     * @Vich\UploadableField(mapping="artist", fileNameProperty="picture")
+     * @var File
+     */
+    private $imageFile;
+
+    /**
+     * @ORM\Column(type="datetime")
+     * @var \DateTime
+     */
+    private $updatedAt;
 
     /**
      * @ORM\Column(type="text")
@@ -93,6 +108,24 @@ class Artist
         $this->picture = $picture;
 
         return $this;
+    }
+
+    public function setImageFile(File $image = null)
+    {
+        $this->imageFile = $image;
+
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($image) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->updatedAt = new \DateTime('now');
+        }
+    }
+
+    public function getImageFile()
+    {
+        return $this->imageFile;
     }
 
     public function getResume(): ?string

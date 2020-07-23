@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Participant;
 use App\Entity\Ticket;
 use App\Form\TicketType;
+use App\Repository\PerformanceDateRepository;
 use App\Repository\TicketRepository;
 use Dompdf\Dompdf;
 use Dompdf\Options;
@@ -27,9 +28,10 @@ class TicketController extends AbstractController
      * @Route("/order", name="ticket_order", methods={"GET","POST"})
      * @param Request $request
      * @param TicketRepository $ticket
+     * @param PerformanceDateRepository $perfDate
      * @return Response
      */
-    public function new(Request $request, TicketRepository $ticket): Response
+    public function new(Request $request, TicketRepository $ticket, PerformanceDateRepository $perfDate): Response
     {
         $tickets = null;
         if (!empty($ticket)) {
@@ -49,10 +51,12 @@ class TicketController extends AbstractController
             return $this->redirectToRoute('ticket_order');
         }
 
+        $perfDates = $perfDate->findAll();
         return $this->render('booking/booking.html.twig', [
             'ticket' => $ticket,
             'tickets' => $tickets,
             'form' => $form->createView(),
+            'perfDates' => $perfDates
         ]);
     }
 

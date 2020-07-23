@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container price">
+    <h1 class="text-center">The Prices</h1>
+    <div class="row mt-5 justify-content-center">
+        <table>
+            <thead>
+            <tr>
+                <td>TICKET</td>
+                {% for range in ranges %}
+                <th>{{ range.spectator }}</th>
+                {% endfor %}
+            </tr>
+            </thead>
+            <tbody>
+            {% for perf in performances %}
+            <tr>
+                <th>{{ perf.name }}</th>
+                {% for range in ranges %}
+                <td>{{ (perf.price * range.price) / 100 }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
