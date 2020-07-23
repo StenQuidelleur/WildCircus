@@ -37,6 +37,11 @@ class Ticket
      */
     private $user;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $date;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -86,6 +91,18 @@ class Ticket
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getDate(): ?string
+    {
+        return $this->date;
+    }
+
+    public function setDate(?string $date): self
+    {
+        $this->date = $date;
 
         return $this;
     }

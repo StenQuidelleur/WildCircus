@@ -14,11 +14,11 @@
         </div>
     </div>
     <div class="container">
-        <div class="row my-5 justify-content-center">
+        <div class="row no-gutters my-5 justify-content-between">
             {% for category in categories %}
-                <div class="col-md-4">
-                    <h3 class="text-center">{{ category.name }}</h3>
-                    <img class="mt-3" src="{{ category.image }}" width="300px" height="300px" alt="{{ category.name }}">
+                <div class="col-md-4 my-3">
+                    <h3 class="text-center font-weight-bold">{{ category.name }}</h3>
+                    <img class="mt-3" src="{{ asset('uploads/files/' ~ category.image) }}" width="360px" height="300px" alt="{{ category.name }}">
                 </div>
             {% endfor %}
         </div>

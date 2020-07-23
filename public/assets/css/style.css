@@ -1,5 +1,11 @@
+body {
+    font-family: 'Noto Serif', serif;
+}
+
 .logo {
     font-family: 'Noto Serif', serif;
+    font-size: 30px;
+    margin-right: 50px;
 }
 
 .banner {
@@ -10,7 +16,50 @@
 }
 
 .text-banner {
-    margin-top: 250px;
+    margin-top: 220px;
+    font-family: 'Aladin', cursive;
+    font-size: 70px;
+}
+
+.card-perf {
+    background-color: #fef4e0 !important;
+}
+
+.login, .price, .about {
+    margin-bottom: 200px;
+    margin-top: 100px;
+}
+
+table, td, th {
+    border: solid 2px #FFF;
+    background-color:#f9f9f9;
+    border-collapse:collapse;
+    text-align: center;
+    width: 900px;
+    height: 50px;
+}
+
+th {
+    background-color: #fff4e0;
+}
+
+.bg-ticket {
+    background: url("https://i.postimg.cc/rFxjyfmd/Sans-titre-2.png") center center / cover no-repeat;
+    font-size: 30px;
+    border: solid 3px #000000;
+    border-radius: 15px;
+}
+
+.bg-ticket h1 {
+    text-decoration: underline;
+}
+
+.footer {
+    font-size: 12px;
+}
+
+.network a {
+    color: #FFF;
 }
 
 @media only screen and (min-width: 600px) {
