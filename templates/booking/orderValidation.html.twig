@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="validate" >
+            <h1 > Thanks for your order !</h1>
+            <p>An email has been sent to you with your tickets attached! Thank you and have a good show !!</p>
+            <a class="btn btn-info" href="{{ path('home_index') }}">Return to home page</a>
+        </div>
+    </div>
+{% endblock %}
+

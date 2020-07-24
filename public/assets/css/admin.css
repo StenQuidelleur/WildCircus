@@ -1,0 +1,38 @@
+:root {
+    /* make the backend contents as wide as the browser window */
+    --body-max-width: 100%;
+    /* change the background color of the <body> */
+    --body-bg: #343b3f;
+    /* remove all border radius to make corners straight */
+    --border-radius: 5px;
+}
+
+body {
+    background-color: #343b3f;
+}
+
+.sidebar-menu {
+    background-color: #343b3f;
+}
+
+.sidebar-menu a {
+    color: white;
+}
+
+.sidebar-menu .fa {
+    color: white;
+    filter: none;
+}
+
+.select2-container--bootstrap .select2-results__option[aria-selected=true] {
+    background-color: #343b3f;
+    font-weight: 500;
+    color: white;
+}
+.select2-container--bootstrap .select2-results__option--highlighted[aria-selected] {
+    background-color: #343b3f;
+    color: white;
+}
+
+
+

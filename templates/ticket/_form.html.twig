@@ -1,0 +1,10 @@
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+    <label for="date">Choose your date :</label>
+    <select class="form-control mb-3" name="perfDate">
+        {% for date in perfDates %}
+            <option value="{{date.id}}">{{date.date}}-{{ date.performance }}</option>
+        {% endfor %}
+    </select>
+    <button class="btn btn-success">{{ button_label|default('Validate') }}</button>
+{{ form_end(form) }}

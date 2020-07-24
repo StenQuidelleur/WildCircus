@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container mt-5">
+        <h1 class="mb-5 mt-3 text-center">The Performances</h1>
+        {% for performance in performances %}
+            <div class="card card-perf bg-light mb-5">
+                <div class="row no-gutters">
+                    <div class="col-md-5">
+                        <img src="{{ asset('uploads/files/' ~ performance.image) }}" height="250px" width="300px" class="card-img-top pr-3 m-2" alt="{{ performance.name }}">
+                    </div>
+                    <div class="col-md-7">
+                        <div class="card-body">
+                            <h3 class="card-title mb-4 font-weight-bold text-center">{{ performance.name }}</h3>
+                            <p class="card-text">{{ performance.resume }}</p>
+                            <div class="text-center mt-4">
+                                {% if is_granted('ROLE_SUBSCRIBER') %}
+                                    <a href="{{ path('ticket_order') }}" class="btn btn-dark mt-2 button-form">Take Ticket</a>
+                                {% else %}
+                                    <a href="{{ path('app_login') }}" class="btn btn-dark mt-2 button-form">Take Ticket</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <h1 class=" my-5 text-center">The Artists</h1>
+        <div class="row mb-5 justify-content-center">
+            {% for artist in artists %}
+            <div class="card col-md-3 m-2 bg-dark">
+                <img src="{{ asset('uploads/files/' ~ artist.picture) }}" class="card-img-top" alt="{{ artist.firstname }} {{ artist.lastname }}">
+                <div class="card-body text-white">
+                    <h5 class="card-title text-center">{{ artist.firstname }} {{ artist.lastname }}</h5>
+                    <p class="card-text">{{ artist.resume }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
