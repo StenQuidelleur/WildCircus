@@ -53,11 +53,13 @@ class TicketController extends AbstractController
                 return $this->redirectToRoute('ticket_order');
             }
         }
+        $name = $this->getUser()->getName();
         $perfDates = $perfDate->findAll();
         return $this->render('booking/booking.html.twig', [
             'ticket' => $ticket,
             'tickets' => $tickets,
             'form' => $form->createView(),
+            'name' => $name,
             'perfDates' => $perfDates
         ]);
     }
@@ -66,9 +68,10 @@ class TicketController extends AbstractController
      * @Route("/{id}/edit", name="ticket_edit", methods={"GET","POST"})
      * @param Request $request
      * @param Ticket $ticket
+     * @param PerformanceDateRepository $perfDate
      * @return Response
      */
-    public function edit(Request $request, Ticket $ticket): Response
+    public function edit(Request $request, Ticket $ticket, PerformanceDateRepository $perfDate): Response
     {
         $form = $this->createForm(TicketType::class, $ticket);
         $form->handleRequest($request);
@@ -80,10 +83,11 @@ class TicketController extends AbstractController
 
             return $this->redirectToRoute('ticket_order');
         }
-
+        $perfDates = $perfDate->findAll();
         return $this->render('ticket/edit.html.twig', [
             'ticket' => $ticket,
             'form' => $form->createView(),
+            'perfDates' => $perfDates
         ]);
     }
 
@@ -134,8 +138,10 @@ class TicketController extends AbstractController
         $dompdf = new Dompdf($pdfOptions);
         $tickets = $this->getUser()->getTickets();
         $perfDates = $perfDate->findAll();
+        $name = $this->getUser()->getName();
         $html = $this->renderView('pdf/order.html.twig', [
             'tickets' => $tickets,
+            'name' => $name,
             'perfDates' => $perfDates
         ]);
         $dompdf->loadHtml($html);

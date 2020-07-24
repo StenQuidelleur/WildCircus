@@ -36,8 +36,12 @@
                 </ul>
             </div>
             <div class="float-right">
-                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-                    <a class="btn btn-dark" href="{{ path('ticket_order') }}">Ticket</a>
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a class="btn btn-dark" href="{{ path('easyadmin') }}">Admin</a>
+                    <a class="btn btn-dark mr-4" href="{{ path('ticket_order') }}">Ticket</a>
+                    <a class="btn btn-danger" href="{{ path('app_logout') }}">Log Out</a>
+                {% elseif is_granted('ROLE_SUBSCRIBER') %}
+                    <a class="btn btn-dark mr-4" href="{{ path('ticket_order') }}">Ticket</a>
                     <a class="btn btn-danger" href="{{ path('app_logout') }}">Log Out</a>
                 {% else %}
                     <a class="btn btn-warning" href="{{ path('app_login') }}">Sign in</a>

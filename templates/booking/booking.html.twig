@@ -2,7 +2,7 @@
 
 {% block body %}
     <div class="container">
-        <div class="card my-5 bg-light">
+        <div class="card my-5 booking bg-light">
             <div class="card-body">
                 <h1 class="text-center mb-4">Take your Tickets</h1>
                 <div class="my-3 px-5">
@@ -26,6 +26,7 @@
                                     <p class="card-text">- This ticket is for : <strong>{{ ticket.ageRange }}</strong></p>
                                     <p class="card-text">- The value of this ticket is <strong>{{ ticket.quantity }}</strong>.</p>
                                     <p class="card-text">- The date of this show is <strong>{{ perfDates[ticket.date].date }}</strong>.</p>
+                                    <p class="card-text">- Name: <strong>{{ name }}</strong></p>
                                     <p class="text-right mr-3"><strong>Price:</strong> {{ (ticket.ageRange.price * ticket.performance.price / 100) * ticket.quantity }}€</p>
                                     <div class="row justify-content-center">
                                         <a href="{{ path('ticket_edit', {'id': ticket.id}) }}" class="btn button-form"><i class="fas fa-2x fa-edit"></i></a>
@@ -46,3 +47,4 @@
         </div>
     </div>
 {% endblock %}
+

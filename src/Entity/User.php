@@ -43,6 +43,11 @@ class User implements UserInterface
      */
     private $tickets;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $Name;
+
     public function __construct()
     {
         $this->tickets = new ArrayCollection();
@@ -160,5 +165,17 @@ class User implements UserInterface
     public function __toString()
     {
         return $this->getEmail();
+    }
+
+    public function getName(): ?string
+    {
+        return $this->Name;
+    }
+
+    public function setName(?string $Name): self
+    {
+        $this->Name = $Name;
+
+        return $this;
     }
 }

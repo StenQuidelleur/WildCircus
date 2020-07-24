@@ -9,7 +9,7 @@ easy_admin:
         - 'assets/css/admin.css'
       favicon: '/assets/9136circus.ico'
     menu:
-      - {entity: 'CategoryPerf', icon: 'search'}
+      - {entity: 'CategoryPerf', icon: 'book'}
       - {entity: 'Artist', icon: 'user'}
       - {entity: 'Perforance', icon: 'theater-masks'}
       - {entity: 'Date', icon: 'calendar-alt'}

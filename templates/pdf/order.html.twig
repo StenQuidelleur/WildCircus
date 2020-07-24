@@ -7,28 +7,25 @@
 </head>
 <body>
     <div class="container">
-        <h1 class="text-center">Take your Tickets</h1>
+        <h1 class="text-center">Your Tickets</h1>
         {% for ticket in tickets %}
             <div class="row mt-5 no-gutters justify-content-center">
-                <div class="card bg-ticket col-11 mb-5">
+                <div class="card ticket-order col-12 mb-5">
                     <div class="col-12">
                         <div class="card-body mt-2">
                             <h1 class="card-title font-weight-bold mb-5 text-center">{{ ticket.performance }} - WildCircus</h1>
                             <p class="card-text">- This ticket is for : <strong>{{ ticket.ageRange }}</strong></p>
                             <p class="card-text">- The value of this ticket is <strong>{{ ticket.quantity }}</strong>.</p>
                             <p class="card-text">- The date of this show is <strong>{{ perfDates[ticket.date].date }}</strong>.</p>
+                            <p class="card-text">- Name: <strong>{{ name }}</strong>.</p>
                             <p class="text-right mr-3"><strong>Price:</strong> {{ (ticket.ageRange.price * ticket.performance.price / 100) * ticket.quantity }}€</p>
-                            <div class="row justify-content-center">
-                                <a href="{{ path('ticket_edit', {'id': ticket.id}) }}" class="btn button-form"><i class="fas fa-2x fa-edit"></i></a>
-                                {{ include('ticket/_delete_form.html.twig') }}
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <hr>
         {% endfor %}
     </div>
-
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
