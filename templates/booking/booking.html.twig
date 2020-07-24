@@ -7,13 +7,15 @@
                 <h1 class="text-center mb-4">Take your Tickets</h1>
                 <div class="my-3 px-5 js-ticket-form">
                     {{ form_start(form) }}
-                    {{ form_widget(form) }}
+                    {{ form_row(form.Performance) }}
                     <label for="date">Choose your date :</label>
-                    <select class="form-control mb-3" name="perfDate">
+                    <select class="form-control mb-3" name="perfDate[]">
                         {% for date in perfDates %}
-                            <option class="js-ticket-option" value="{{date.id}}">{{date.date}}-{{ date.performance }}</option>
+                            <option value="{{date.id}}">{{date.date}}-{{ date.performance }}</option>
                         {% endfor %}
                     </select>
+                    {{ form_row(form.ageRange) }}
+                    {{ form_row(form.Quantity) }}
                     <button class="btn btn-success">{{ button_label|default('Validate') }}</button>
                     {{ form_end(form) }}
                 </div>
