@@ -5,13 +5,13 @@
         <div class="card my-5 booking bg-light">
             <div class="card-body">
                 <h1 class="text-center mb-4">Take your Tickets</h1>
-                <div class="my-3 px-5">
+                <div class="my-3 px-5 js-ticket-form">
                     {{ form_start(form) }}
                     {{ form_widget(form) }}
                     <label for="date">Choose your date :</label>
                     <select class="form-control mb-3" name="perfDate">
                         {% for date in perfDates %}
-                            <option value="{{date.id}}">{{date.date}}-{{ date.performance }}</option>
+                            <option class="js-ticket-option" value="{{date.id}}">{{date.date}}-{{ date.performance }}</option>
                         {% endfor %}
                     </select>
                     <button class="btn btn-success">{{ button_label|default('Validate') }}</button>
@@ -38,9 +38,9 @@
                     </div>
                 {% endfor %}
                 {% if tickets != null %}
-                <div class="col text-center">
-                    <a class="btn btn-success" href="{{ path('order_payment') }}">Valid your order </a>
-                </div>
+                    <div class="col text-center">
+                        <a class="btn btn-success" href="{{ path('order_payment') }}">Valid your order </a>
+                    </div>
                 {% else %}
                 {% endif %}
             </div>
@@ -48,3 +48,14 @@
     </div>
 {% endblock %}
 
+{% block javascripts %}
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        document.querySelectorAll('option.js-ticket-option').forEach(option => {
+            option.addEventListener('click', e => {
+                e.preventDefault()
+                console.log(this)
+            })
+        })
+    </script>
+{% endblock %}
