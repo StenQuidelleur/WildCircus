@@ -7,6 +7,7 @@ namespace App\Controller;
 use App\Entity\Contact;
 use App\Form\ContactType;
 use App\Repository\AgeRangeRepository;
+use App\Repository\ArtistRepository;
 use App\Repository\BannerRepository;
 use App\Repository\CategoryPerfRepository;
 use App\Repository\PerformanceRepository;
@@ -62,6 +63,19 @@ class HomeController extends AbstractController
         return $this->render('home/prices.html.twig', [
             'performances' => $performances,
             'ranges' => $ranges
+        ]);
+    }
+
+    /**
+     * @Route("/artist", name="artist")
+     * @param ArtistRepository $artist
+     * @return Response
+     */
+    public function artist(ArtistRepository $artist): Response
+    {
+        $artists = $artist->findAll();
+        return $this->render('home/artist.html.twig', [
+            'artists' => $artists
         ]);
     }
 
