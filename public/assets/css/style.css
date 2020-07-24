@@ -30,6 +30,23 @@ body {
     margin-top: 100px;
 }
 
+.validate {
+    margin-bottom: 400px;
+    margin-top: 100px;
+}
+
+.booking {
+    margin-bottom: 100px!important;
+}
+
+.ticket-order {
+    font-size: 20px;
+}
+
+.ticket-order h1 {
+    font-size: 25px;
+}
+
 table, td, th {
     border: solid 2px #FFF;
     background-color:#f9f9f9;
@@ -45,13 +62,13 @@ th {
 
 .bg-ticket {
     background: url("https://i.postimg.cc/rFxjyfmd/Sans-titre-2.png") center center / cover no-repeat;
-    font-size: 30px;
     border: solid 3px #000000;
     border-radius: 15px;
 }
 
 .bg-ticket h1 {
     text-decoration: underline;
+    font-size: 25px;
 }
 
 .footer {
@@ -66,5 +83,9 @@ th {
     .footer {
         flex-direction: inherit !important;
         justify-content: space-around;
+    }
+
+    .bg-ticket {
+        font-size: 25px;
     }
 }

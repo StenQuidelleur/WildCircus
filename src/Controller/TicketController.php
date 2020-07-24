@@ -43,19 +43,23 @@ class TicketController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $ticket->setUser($this->getUser());
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($ticket);
-            $entityManager->flush();
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $ticket->setUser($this->getUser());
+                $ticket->setDate($_POST['perfDate']);
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($ticket);
+                $entityManager->flush();
 
-            return $this->redirectToRoute('ticket_order');
+                return $this->redirectToRoute('ticket_order');
+            }
         }
-
+        $name = $this->getUser()->getName();
         $perfDates = $perfDate->findAll();
         return $this->render('booking/booking.html.twig', [
             'ticket' => $ticket,
             'tickets' => $tickets,
             'form' => $form->createView(),
+            'name' => $name,
             'perfDates' => $perfDates
         ]);
     }
@@ -64,22 +68,26 @@ class TicketController extends AbstractController
      * @Route("/{id}/edit", name="ticket_edit", methods={"GET","POST"})
      * @param Request $request
      * @param Ticket $ticket
+     * @param PerformanceDateRepository $perfDate
      * @return Response
      */
-    public function edit(Request $request, Ticket $ticket): Response
+    public function edit(Request $request, Ticket $ticket, PerformanceDateRepository $perfDate): Response
     {
         $form = $this->createForm(TicketType::class, $ticket);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+            $ticket->setUser($this->getUser());
+            $ticket->setDate($_POST['perfDate']);
 
             return $this->redirectToRoute('ticket_order');
         }
-
+        $perfDates = $perfDate->findAll();
         return $this->render('ticket/edit.html.twig', [
             'ticket' => $ticket,
             'form' => $form->createView(),
+            'perfDates' => $perfDates
         ]);
     }
 
@@ -101,6 +109,15 @@ class TicketController extends AbstractController
     }
 
     /**
+     * @Route("/order-payment", name="order_payment")
+     * @return Response
+     */
+    public function orderPayment(): Response
+    {
+        return $this->render('booking/orderPayment.html.twig');
+    }
+
+    /**
      * @Route("/order-validation", name="order_validation")
      * @return Response
      */
@@ -111,16 +128,21 @@ class TicketController extends AbstractController
 
     /**
      * @Route("/ajax-generate-pdfOrder", name="ajax-generate-pdfOrder",  methods={"GET", "POST"}))
+     * @param PerformanceDateRepository $perfDate
      * @return JsonResponse
      */
-    public function generatePdfOrder()
+    public function generatePdfOrder(PerformanceDateRepository $perfDate)
     {
         $pdfOptions = new Options();
         $pdfOptions->set('defaultFont', 'Arial');
         $dompdf = new Dompdf($pdfOptions);
         $tickets = $this->getUser()->getTickets();
+        $perfDates = $perfDate->findAll();
+        $name = $this->getUser()->getName();
         $html = $this->renderView('pdf/order.html.twig', [
-            'tickets' => $tickets
+            'tickets' => $tickets,
+            'name' => $name,
+            'perfDates' => $perfDates
         ]);
         $dompdf->loadHtml($html);
         $dompdf->setPaper('A4', 'portrait');
