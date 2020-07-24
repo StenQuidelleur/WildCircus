@@ -9,7 +9,7 @@
                     {{ form_start(form) }}
                     {{ form_row(form.Performance) }}
                     <label for="date">Choose your date :</label>
-                    <select class="form-control mb-3" name="perfDate[]">
+                    <select class="form-control mb-3" name="perfDate">
                         {% for date in perfDates %}
                             <option value="{{date.id}}">{{date.date}}-{{ date.performance }}</option>
                         {% endfor %}
@@ -48,16 +48,4 @@
             </div>
         </div>
     </div>
-{% endblock %}
-
-{% block javascripts %}
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script>
-        document.querySelectorAll('option.js-ticket-option').forEach(option => {
-            option.addEventListener('click', e => {
-                e.preventDefault()
-                console.log(this)
-            })
-        })
-    </script>
 {% endblock %}
